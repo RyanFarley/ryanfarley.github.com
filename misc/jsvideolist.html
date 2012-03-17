@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head><title>
+
+	FarleyFlicks - Facebook Videos
+
+</title><link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="date.js"></script>
+</head>
+
+<body style="background-image:none;background-color:White;margin:0" onload="location.href='#'">
+
+    <div>
+	<a href="http://www.youtube.com/subscription_center?add_user=RyanFarley000" target="_blank"><img src="FacebookVideosHeader.png" border="0" /></a>
+
+	<br />
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+      google.load("swfobject", "2.1");
+    </script>  
+	<!--https://code.google.com/apis/ajax/playground/?exp=youtube#change_the_playing_video-->
+    <script type="text/javascript">
+      function updateHTML(elmId, value) {
+        document.getElementById(elmId).innerHTML = value;
+      }
+
+      function loadVideo(videoID, title, descLine) {
+        if(ytplayer) {
+          ytplayer.loadVideoById(videoID);
+		  updateHTML('labelLatestTitle', title);
+		  updateHTML('labelLatestDesc', descLine);
+		  updateHTML('facebookLikeButtons', '<fb:like href="http://www.youtube.com/watch?v=' + videoID + '" send="true" width="380" show_faces="false"></fb:like>');
+		  window.scrollTo(0, 0);
+        }
+      }
+	  
+      function onPlayerError(errorCode) {
+        alert("An error occured of type:" + errorCode);
+      }
+      
+      function onYouTubePlayerReady(playerId) {
+        ytplayer = document.getElementById("ytPlayer");
+        ytplayer.addEventListener("onError", "onPlayerError");
+      }
+	  
+      function loadPlayer() {
+        // default video to load
+        var defaultVideoID = ""
+		var defaultVideoTitle = "";
+		var defaultVideoDesc = "";
+		
+        // Lets Flash from another domain call JavaScript
+        var params = { allowScriptAccess: "always" };
+        // The element id of the Flash embed
+        var atts = { id: "ytPlayer" };
+		
+		
+		var playListURL = 'http://gdata.youtube.com/feeds/api/users/ryanfarley000/uploads?alt=json&callback=?';
+		$.getJSON(playListURL, function(data) {
+			var list_data="";
+			var count = 1;
+			$.each(data.feed.entry, function(i, item) {
+				var feedTitle = item.title.$t.replace(/\'/g, '&#146;');
+				var feedDesc = item.content.$t;
+				var feedURL = item.link[1].href;
+				var fragments = item.id.$t.split("/");
+				var videoID = fragments[fragments.length - 1];
+				var pubDate = item.published.$t;
+				var thumb = "http://img.youtube.com/vi/"+ videoID +"/default.jpg";
+				
+				var descLine = feedDesc.split('\n')[0].replace(/\'/g, '&#146;');
+				
+				if (defaultVideoID == '')
+				{
+					defaultVideoID = videoID;
+					defaultVideoTitle = feedTitle;
+					defaultVideoDesc = descLine;
+				}
+						
+				if (count == 1)
+				{					
+					list_data += '<tr>';
+				}
+				
+				list_data += '<td valign=\"top\">';
+				list_data += '<a href="javascript:loadVideo(\'' + videoID + '\', \'' + feedTitle + '\', \'' + descLine + '\');" title="' + feedDesc + '" class="videolinksmall"><img src="'+ thumb +'" border=0 width="145" height="111"><span class="play-icon"><img src="play_large.png" width="37" height="35" alt="Play"></span></a>';
+				list_data += '<a href="javascript:loadVideo(\'' + videoID + '\', \'' + feedTitle + '\', \'' + descLine + '\');" title="' + feedDesc + '"><b>' + feedTitle + '</b></a>';
+				list_data += '<div class="PublishedOnText">Published ' + new Date(pubDate).toString('MMMM dd, yyyy') + '</div>';
+				
+				if (count == 3)
+				{
+					list_data += '</tr><tr><td colspan="3">&nbsp;</td></tr>';
+					count = 0;
+				}
+				count++;
+			});
+			list_data = '<table border=0 width=100% style="table-layout:fixed;width:100%;">' + list_data + '</table><br>';
+			$(list_data).appendTo("#videoArchive");
+			
+			// All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
+			swfobject.embedSWF("http://www.youtube.com/v/" + defaultVideoID + 
+                           "?version=3&enablejsapi=1&playerapiid=player1", 
+                           "videoDiv", "750", "450", "9", null, null, params, atts);
+						   
+		  updateHTML('labelLatestTitle', defaultVideoTitle);
+		  updateHTML('labelLatestDesc', defaultVideoDesc);
+		  updateHTML('facebookLikeButtons', '<fb:like href="http://www.youtube.com/watch?v=' + defaultVideoID + '" send="true" width="380" show_faces="false"></fb:like>');
+		});
+	}
+
+	  
+	  $(document).ready(function(){
+		loadPlayer();
+	  });
+	  
+	</script>
+
+	<div id="videoDiv"><br><br><b>Loading...</b><br><br></div>
+	<br>
+
+	<span id="labelLatestTitle" style="font-weight:bold;font-size:16pt;"></span>
+
+	<br /><span id="labelLatestDesc"></span>
+
+	<br /><span id="labelLatestPublishedOn" class="PublishedOnText"></span>
+
+	<br />
+
+		<div class="videoshare" style="background-color:whitesmoke;height:60px;">
+
+			<img src="share.png" style="position:relative;top:-13px;padding-right: 10px;" align="left">
+
+			<div style="padding-bottom:5px;">Like this video? Sharing is nice :-)</div>
+
+				<div id="fb-root"></div>
+
+<script>	(function (d, s, id) {
+
+var js, fjs = d.getElementsByTagName(s)[0];
+
+if (d.getElementById(id)) { return; }
+
+js = d.createElement(s); js.id = id;
+
+js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+
+fjs.parentNode.insertBefore(js, fjs);
+
+} (document, 'script', 'facebook-jssdk'));</script>
+
+<span id="facebookLikeButtons"></span>
+
+
+
+			<br />
+
+		</div>
+
+	<br />
+
+	<br />
+
+	
+
+	<div class="profilename">The Archive</div>
+
+	<div id="panelArchive">
+
+	<div id="videoArchive">
+	</div>
+
+	</div>
+
+
+
+	<script type="text/javascript" language="javascript">
+
+		var popupWindow = null;
+
+		function centeredPopup(url,winName,w,h,scroll)
+
+		{
+
+			LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+
+			TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+
+			settings =
+
+			'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+
+			popupWindow = window.open(url,winName,settings)
+
+		}
+
+	</script>
+
+    </div>
+
+</body>
+
+</html>
+

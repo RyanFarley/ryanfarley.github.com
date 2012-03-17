@@ -1,0 +1,296 @@
+﻿body 
+{
+	background-image: url(/images/HeaderBackground.jpg);
+	background-position: top;
+	background-repeat: repeat-x;
+	background-color: Gainsboro;
+	margin: 0px;
+	font-family: "segoe ui",tahoma,verdana,"lucida grande","lucida sans unicode",sans-serif;
+	font-size: 10pt;
+	line-height: 14pt;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+a
+{
+	color: #1360a4;
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+#header
+{
+	height: 299px;
+	background-image: url(/images/FarleyFlicks_Header.jpg);
+	background-repeat: no-repeat;
+	background-position: top;
+	margin:0 auto;
+	align:center;
+}
+
+#linkheader
+{
+	height: 215px;
+	width: 500px;
+	position: relative;
+	display:block;
+	top: 20px;
+	margin:0 auto;
+	align:center;
+}
+
+#navouter
+{
+	width: 950px;
+	position: relative;
+	height: 45px;
+	margin: 0px auto;
+	padding: 0px;
+	margin-top: -50px;
+}
+
+#navigation, #ctl00_navigation
+{
+	height:45px;
+	list-style: none;
+	line-height: normal;
+	padding: 0px;
+	margin: 0px;
+}
+
+#navigation li, #ctl00_navigation li
+{
+	float: left;
+	display: block;
+	height: 45px;
+	margin: 0px;
+	padding: 12px 25px 0px 25px;
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: bold;
+	color: White;
+	font-family: Trebuchet MS, Tahoma, Arial;
+	width: 135px;
+}
+
+#navigation li:hover, #ctl00_navigation li:hover
+{
+	background-image: url(/images/NavHoverBack.jpg);
+	background-repeat: repeat-x;
+	background-position: top;
+}
+
+#navigation li.active, #ctl00_navigation li.active
+{
+	background-image: url(/images/navselected.jpg);
+	background-repeat: no-repeat;
+	background-position: left top;
+	display: block;
+}
+
+#navigation li a, #ctl00_navigation li a
+{
+	color: inherit !important;
+	text-decoration: none;
+	width: 135px;
+	height: 32px;
+	display: block;
+}
+
+#socialbox
+{
+	position: absolute;
+	top: -230px;
+	left: 820px;
+}
+
+#contentsection
+{
+	width: 920px;
+	position: relative;
+	margin: 0px auto;
+	background-color: White;
+	padding: 10px;
+	background-image: url(/images/ContentBack.jpg);
+	background-repeat: repeat-y;
+	background-position: center;
+}
+
+#contentsectiontop
+{
+	background-image: url(/images/NavigationShadow.jpg);
+	background-repeat: repeat-x;
+	height: 6px;
+	margin: -10px;
+}
+
+#content
+{
+	padding: 30px;
+	padding-top: 20px;
+}
+
+.title
+{
+	font-family: Tahoma, Trebuchet MS, Tahoma, Arial;
+	font-size: 26pt;
+	letter-spacing: -3px;
+	color: #505050;
+	background-image: url(/images/video_icon2.png);
+	background-position: top left;
+	background-repeat: no-repeat;
+	padding-left: 44px;
+	margin-top: 15px;
+	margin-bottom: 20px;
+	padding-top: 8px;
+	height: 40px;
+}
+
+.titledim
+{
+	color: #a0a0a0;
+}
+
+.titletext
+{
+	font-size: 13pt;
+	letter-spacing: -1px;
+}
+
+#footer
+{
+	width: 900px;
+	position: relative;
+	height: 45px;
+	margin: 0px auto;
+	background-color: #404040;
+	color: White;
+	padding: 20px;
+}
+
+.profilename
+{
+	font-family: Tahoma, Trebuchet MS, Tahoma, Arial;
+	font-size: 18pt;
+	letter-spacing: -2px;
+	color: #505050;
+	font-weight: bold;
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+
+.PublishedOnText
+{
+	font-size:9px;
+	color: #606060;
+}
+
+a.videolinksmall
+{
+	width: 160px;
+	height: 120px;
+	text-decoration: none;
+	position: relative;
+	display: block;
+	padding: 3px;
+}
+
+a.videolinksmall span.play-icon
+{
+  visibility:hidden;
+  position:absolute;
+  left:40%;
+  top:35%;
+  filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+}
+
+a.videolinksmall:hover span.play-icon
+{
+  visibility:visible;
+}
+
+a.videolinklarge
+{
+	width: 320px;
+	height: 240px;
+	text-decoration: none;
+	position: relative;
+	display: block;
+	padding: 3px;
+}
+
+a.videolinklarge span.play-icon
+{
+  visibility:hidden;
+  position:absolute;
+  left:40%;
+  top:35%;
+  filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+}
+
+a.videolinklarge:hover span.play-icon
+{
+  visibility:visible;
+}
+
+span.play-icon img
+{
+	border: 0px;
+}
+
+.videoshare
+{
+	font-weight: bold;
+	font-size: 11pt;
+	border: 1px solid gray;
+	background-color: gainsboro;
+	padding: 2px;
+	padding-top: 6px;
+	padding-left: 5px;
+	height: 25px;
+	margin-bottom: 2px;
+	color: #303030;
+}
+
+.facebooklink, a.facebooklink
+{
+	background-image: url(/images/facebook16.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	font-size: 11px;
+	font-weight: normal;
+	padding-left: 18px;
+	height: 18px;
+}
+
+.twitterlink, a.twitterlink
+{
+	background-image: url(/images/twitter16.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	font-size: 11px;
+	font-weight: normal;
+	padding-left: 18px;
+	height: 18px;
+}
+
+.youtubelink, a.youtubelink
+{
+	background-image: url(/images/youtube16.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	font-size: 11px;
+	font-weight: normal;
+	padding-left: 18px;
+	height: 18px;
+}
