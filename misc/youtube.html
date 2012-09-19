@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>YouTube Test</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "//gdata.youtube.com/feeds/users/RyanFarley000/uploads?alt=json",
+                dataType: "json"
+            }).done(function (data) {
+                console.log(data);
+				
+                var feed = data.feed;
+				var entries = feed.entry || [];
+				
+                for (var i = 0; i < entries.length; i++) {				
+					var entry = entries[i];
+					console.log(entry);
+					
+					var title = entry.title.$t;
+					var desc = entry.media$group.media$description.$t.split("\n")[0];
+					var img = entry.media$group.media$thumbnail[0].url.replace("http:", "");
+
+                    $("#dataContent").html(function (index, oldHtml) {
+                        return oldHtml + "<br /><br />" + title + ": " + desc + "<br />" + "<img src=\"" + img + "\" height=120 width=160>";
+                    });
+                }
+            });
+        });
+		
+    </script>
+</head>
+<body>
+    <h2>Videos</h2>
+    <div id="dataContent"></div>
+
+</body>
+</html>
